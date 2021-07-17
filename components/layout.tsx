@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import styles from './layout.module.css'
+import styles from './layout.module.scss'
 
 interface Props {
   children: ReactNode
