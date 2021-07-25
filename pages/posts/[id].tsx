@@ -1,8 +1,11 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsResult } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { PostData, getAllPostIds, getPostData } from '../../lib/posts'
 
+import Date from '../../components/date'
+import Head from 'next/head'
 import Layout from '../../components/layout'
 import { ParsedUrlQuery } from 'querystring'
+import utilStyles from '../../styles/utils.module.scss'
 
 type PostProps = {
   postData: PostData;
@@ -11,12 +14,16 @@ type PostProps = {
 export default function Post({ postData }: PostProps) {
   return (
     <Layout>
-      {postData.title}
-      <br />
-      {postData.id}
-      <br />
-      {postData.date}
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHTML ? postData.contentHTML : "" }} />
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}>
+          <Date dateString={postData.date ? postData.date : ""} />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHTML ? postData.contentHTML : "" }} />
+      </article>
     </Layout>
   )
 }
