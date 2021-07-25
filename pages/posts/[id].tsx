@@ -20,9 +20,9 @@ export default function Post({ postData }: PostProps) {
       <article>
         <h1 className={utilStyles.headingXl}>{postData.title}</h1>
         <div className={utilStyles.lightText}>
-          <Date dateString={postData.date ? postData.date : ""} />
+          <Date dateString={postData.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHTML ? postData.contentHTML : "" }} />
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHTML }} />
       </article>
     </Layout>
   )

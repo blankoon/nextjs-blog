@@ -6,14 +6,14 @@ import remark from 'remark'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export type PostData = {
-  id: string,
-  contentHTML?: string,
-  date?: string,
-  title?: string
+type PostId = { id: string }
+export type PostData = PostId & {
+  contentHTML: string,
+  date: string,
+  title: string
 }
 
-export function getSortedPostsData(): PostData[] {
+export function getSortedPostsData(): PostId[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map(fileName => {
@@ -84,5 +84,5 @@ export async function getPostData(id: string): Promise<PostData> {
     id,
     contentHTML,
     ...matterResult.data
-  }
+  } as PostData
 }
